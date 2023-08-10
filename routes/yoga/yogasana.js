@@ -26,14 +26,13 @@ router.get('/', async (req, res) => {
 
 //Get a random Yoga Asana
 router.get('/random', async (req, res) => {
-    const size = req.query.size;
     const docQuantity = await Yogasana.countDocuments();
     const randomIndex = Math.floor(Math.random() * docQuantity);
     while(randomIndex == 91)
     {
         randomIndex = Math.floor(Math.random() * docQuantity);
     }
-    const yogasana = await Yogasana.find().skip(randomIndex).limit(size);
+    const yogasana = await Yogasana.find().skip(randomIndex).limit(1);
     res.status(200).json(yogasana);
 });
 
